@@ -1,0 +1,34 @@
+tickers:
+  - AAPL
+  - NVDA
+  - MSFT
+  - GOOGL
+  - AMZN
+
+schedule:
+  interval: "rate(6 hours)"
+
+email:
+  to: "your-email@example.com"
+  from: "stocknewstracker@example.com"
+  subject_prefix: "Stock Briefing"
+
+edgar:
+  user_agent: "StockNewsTracker your-name your-email@example.com"
+  filing_types:
+    - "8-K"
+    - "10-Q"
+    - "10-K"
+    - "4"
+  lookback_days: 7
+  max_content_length: 50000
+
+pricing:
+  history_days: 5
+
+s3:
+  bucket_name: "stocknewstracker-archive"
+
+anthropic:
+  model: "claude-sonnet-4-20250514"
+  max_tokens: 1024
