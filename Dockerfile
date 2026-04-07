@@ -1,7 +1,8 @@
 FROM public.ecr.aws/lambda/python:3.11
 
-COPY Pipfile Pipfile.lock ./
-RUN pip install pipenv && pipenv install --system --deploy
+RUN pip install --upgrade pip && \
+    pip install "numpy<2" && \
+    pip install anthropic yfinance boto3 pyyaml jinja2 requests
 
 COPY src/ ./src/
 COPY templates/ ./templates/
