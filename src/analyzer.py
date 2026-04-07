@@ -110,7 +110,14 @@ class Analyzer:
             )
 
             response_text = message.content[0].text
-            analysis = json.loads(response_text)
+            # Strip markdown code fences if present
+            cleaned = response_text.strip()
+            if cleaned.startswith("```"):
+                cleaned = cleaned.split("\n", 1)[1] if "\n" in cleaned else cleaned[3:]
+                if cleaned.endswith("```"):
+                    cleaned = cleaned[:-3]
+                cleaned = cleaned.strip()
+            analysis = json.loads(cleaned)
 
             return TickerAnalysis(
                 ticker=ticker,
